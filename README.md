@@ -26,3 +26,4 @@ The Tkinter library provides the user interface, while SQLite creates a password
 # General Images
 
 ![Photo](photo.png)
+![Photo1](photo1.png)

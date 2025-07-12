@@ -72,14 +72,14 @@ def main():
 
     def save_file():
         if not text_label.cget("text"):
-            messagebox.showwarning("Warning", "Kaydedilecek bir veri yok!")
+            messagebox.showwarning("Warning", "No data")
             return
         file_path = filedialog.asksaveasfilename(defaultextension=".txt",
                                                  filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")]) # <-- Saved files with type of txt in optionel files
         if file_path:
             with open(file_path, 'w', encoding='utf-8') as file:
                 file.write(text_label.cget("text"))
-            messagebox.showinfo("Dosya Kaydedildi")
+            messagebox.showinfo("File saved")
 
     def Sett():
         notebook.add(tab2, text="Settings")
@@ -96,7 +96,7 @@ def main():
     Setting = tk.Button(tab1, text="Settings", bg="Black", fg="white", command=Sett)
     Setting.place(x=20, y=30)
 
-    save_button = tk.Button(tab1, text="Kaydet", command=save_file)
+    save_button = tk.Button(tab1, text="Save", command=save_file)
     save_button.place(x=230, y=250)
 
     exit_btn = tk.Button(tab1, text="Exit", command=exits)
@@ -111,7 +111,7 @@ def main():
         k.execute("INSERT INTO list VALUES (?, ?)", (label, datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         connect.commit()
 
-    copy = tk.Button(tab1, text="Kopyala", command=label_copy)
+    copy = tk.Button(tab1, text="Copy", command=label_copy)
     copy.place(x=175, y=250)
 
     def copy_keyboard(event): copy.invoke()
@@ -145,7 +145,7 @@ def main():
             values = ttreeview.item(selected[0], "values")
             pyperclip.copy(values[0])
 
-    copy2 = tk.Button(tab2, text="Kopyala", command=copyTo_archive)
+    copy2 = tk.Button(tab2, text="Copy", command=copyTo_archive)
     copy2.place(x=20, y=250)
 
     root.mainloop()

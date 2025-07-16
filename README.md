@@ -24,7 +24,21 @@ pip install keyboard
 The Tkinter library provides the user interface, while SQLite creates a password manager by storing passwords in the database, and the keyboard module provides communication with shortcuts.
 
 Same Shortcuts:
--ctrl+shift+f
+````
+ctrl+shift+f | Creates a 14 digit password
+````
+````
+ctrl+shift+t | Creates a 12 digit password
+````
+````
+ctrl+shift+r | Creates a 10 digit password
+````
+````
+ctrl+shift+e | Creates a 8 digit password
+````
+````
+ctrl+shift+s | Creates a 6 digit password
+````
 
 
 # General Images

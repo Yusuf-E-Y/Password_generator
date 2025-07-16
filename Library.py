@@ -1,7 +1,8 @@
+from datetime import datetime
 import keyboard
 import random
 import pyperclip
-import datetime
+import sqlite3
 
 password1 = []
 
@@ -29,6 +30,12 @@ class Generator:
 
         terminal_data1 = "".join(password1)
         pyperclip.copy(terminal_data1)
+        
+        conn = sqlite3.connect("Archive.db")
+        k = conn.cursor()
+        k.execute("INSERT INTO list (Password, Date) VALUES (?, ?)", (terminal_data1, datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+        conn.commit()
+        conn.close()
         password1.clear()
 
 keyboard.add_hotkey('ctrl+shift+f', lambda: Generator.password(7, 6, 6))

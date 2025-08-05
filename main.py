@@ -13,7 +13,7 @@ def main():
     notebook = ttk.Notebook(root)
     notebook.pack(expand=True, fill="both")
     tab1 = ttk.Frame(notebook)
-    notebook.add(tab1, text="Ana menü")
+    notebook.add(tab1, text="Main menu")
     tab2 = ttk.Frame(notebook)
 
     options = [6, 8, 10, 12, 14]

@@ -39,9 +39,7 @@ ctrl+shift+e | Creates a 8 digit password
 ````
 ctrl+shift+s | Creates a 6 digit password
 ````
-
-
 # General Images
 
-![Photo](photo.png)
-![Photo1](photo1.png)
+![Photo](Photos/photo.png)
+![Photo1](Photos/photo1.png)

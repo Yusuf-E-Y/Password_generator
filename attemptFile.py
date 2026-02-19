@@ -5,7 +5,7 @@ import pyperclip
 from datetime import datetime
 import sqlite3
 
-# Tema ayarları
+# Theme
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 
@@ -16,20 +16,20 @@ def main():
     root.geometry("520x640")
     root.resizable(False, False)
 
-    # ── Tab sistemi ──────────────────────────────────────────────
+    # ── Tab system ──────────────────────────────────────────────
     tabview = ctk.CTkTabview(root, width=500, height=600)
     tabview.pack(padx=10, pady=10, fill="both", expand=True)
 
     tab1 = tabview.add("🏠 Ana Menü")
     tab2 = tabview.add("🗂 Arşiv")
 
-    # ── Veritabanı ───────────────────────────────────────────────
+    # ── Database ───────────────────────────────────────────────
     connect = sqlite3.connect("Archive.db")
     k = connect.cursor()
     k.execute("CREATE TABLE IF NOT EXISTS list (Password TEXT, Date TEXT)")
     connect.commit()
 
-    # ── Algoritma (değiştirilmedi) ────────────────────────────────
+    # ── Algorithm ────────────────────────────────
     password = []
 
     def number_random(d):
@@ -101,7 +101,7 @@ def main():
         pyperclip.copy(label)
         k.execute("INSERT INTO list VALUES (?, ?)", (label, datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         connect.commit()
-        # Arşiv listesini güncelle
+        # Update archive list
         archive_list.insert("", "end", values=(label, datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         copy_btn.configure(text="✅ Kopyalandı!")
         root.after(1500, lambda: copy_btn.configure(text="📋 Kopyala"))
@@ -117,7 +117,7 @@ def main():
         connect.close()
         root.destroy()
 
-    # ── TAB 1 - Ana Menü UI ───────────────────────────────────────
+    # ── TAB 1 - Main Menu UI ───────────────────────────────────────
 
     # Başlık
     title_label = ctk.CTkLabel(tab1, text="🔐 Şifre Oluşturucu",
@@ -128,7 +128,7 @@ def main():
                             font=ctk.CTkFont(size=12), text_color="gray")
     subtitle.pack(pady=(0, 20))
 
-    # Şifre Uzunluğu
+    # Password length
     length_frame = ctk.CTkFrame(tab1, corner_radius=12)
     length_frame.pack(padx=30, pady=8, fill="x")
 
@@ -140,7 +140,7 @@ def main():
     length_combo.set("8")
     length_combo.pack(side="right", padx=15, pady=12)
 
-    # Şifre Gösterim Kutusu
+    # Show password tab
     display_frame = ctk.CTkFrame(tab1, corner_radius=12, fg_color=("#1a1a2e", "#1a1a2e"))
     display_frame.pack(padx=30, pady=12, fill="x")
 
@@ -152,12 +152,12 @@ def main():
                                     text_color="#00d4ff")
     password_display.pack(pady=(2, 8))
 
-    # Güç göstergesi
+    # Power bar
     strength_bar = ctk.CTkProgressBar(display_frame, width=300, height=8)
     strength_bar.set(0)
     strength_bar.pack(pady=(0, 12))
 
-    # Butonlar
+    # Butons
     btn_frame = ctk.CTkFrame(tab1, fg_color="transparent")
     btn_frame.pack(padx=30, pady=10, fill="x")
 
@@ -179,7 +179,7 @@ def main():
                              fg_color="#27ae60", hover_color="#2ecc71")
     save_btn.pack(side="right", expand=True, fill="x")
 
-    # Çıkış
+    # Exit
     exit_btn = ctk.CTkButton(tab1, text="Çıkış", command=exits,
                              width=80, height=30, corner_radius=8,
                              fg_color="transparent", border_width=1,
@@ -187,7 +187,7 @@ def main():
                              hover_color="#c0392b")
     exit_btn.pack(pady=(10, 0))
 
-    # ── TAB 2 - Arşiv UI ─────────────────────────────────────────
+    # ── TAB 2 - Arhive UI ─────────────────────────────────────────
     from tkinter import ttk
 
     ctk.CTkLabel(tab2, text="📚 Şifre Arşivi",
@@ -195,7 +195,7 @@ def main():
     ctk.CTkLabel(tab2, text="Kopyalanan şifreler buraya kaydedilir",
                  font=ctk.CTkFont(size=11), text_color="gray").pack(pady=(0, 12))
 
-    # Treeview (stil düzenlemesi)
+    # Treeview 
     style = ttk.Style()
     style.theme_use("default")
     style.configure("Treeview", background="#2b2b2b", foreground="white",
@@ -226,7 +226,7 @@ def main():
                               height=38, corner_radius=10)
     copy2_btn.pack(pady=12, padx=20, fill="x")
 
-    # ── Klavye kısayolları ────────────────────────────────────────
+    # ── Keyboard sprtcuts ────────────────────────────────────────
     root.bind("<Control-c>", lambda e: copy_btn.invoke())
     root.bind("<Control-s>", lambda e: save_btn.invoke())
     root.bind("<Return>", lambda e: create_btn.invoke())
@@ -235,4 +235,5 @@ def main():
 
 
 if __name__ == '__main__':
+
     main()
